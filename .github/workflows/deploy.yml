@@ -27,3 +27,15 @@ jobs:
 
       - name: Verify Pushed img
         run: docker pull siliconborn23/ci-cd_prac:latest
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.SSH_HOST}}
+          username: ${{secrets.SSH_USERNAME}}
+          key: ${{secrets.SSH_KEY}}
+          script: |
+            sudo docker pull siliconborn23/ci-cd_prac:latest
+            sudo docker stop webapp || true
+            sudo docker rm web-app || true
+            sudo docker run -d --name web-app -p 3005:3000 siliconborn23/ci-cd_prac:latest

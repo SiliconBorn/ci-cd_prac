@@ -5,7 +5,6 @@ const app = express();
 app.use(express.json())
 
 app.post("/hdfcWebhook", async (req, res) => {
-    //TODO: Add zod validation here?
     const paymentInformation: {
         token: string;
         userId: string;

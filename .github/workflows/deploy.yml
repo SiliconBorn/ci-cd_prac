@@ -36,6 +36,6 @@ jobs:
           key: ${{secrets.SSH_KEY}}
           script: |
             sudo docker pull siliconborn23/ci-cd_prac:latest
-            sudo docker stop webapp || true
+            sudo docker stop web-app || true
             sudo docker rm web-app || true
             sudo docker run -d --name web-app -p 3005:3000 siliconborn23/ci-cd_prac:latest
